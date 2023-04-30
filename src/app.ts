@@ -6,6 +6,7 @@ import config from "./config";
 import { successLogHandler, errorLogHandler } from "./config/morgan";
 import { errorHandler, errorHandlerCall } from "./middlewares/error";
 import routes from "./routes/v1";
+import connectDB from "./database";
 
 const app = express();
 
@@ -22,5 +23,7 @@ app.use(cors());
 app.use("/v1", routes);
 app.use(errorHandlerCall);
 app.use(errorHandler);
+
+connectDB();
 
 export default app;

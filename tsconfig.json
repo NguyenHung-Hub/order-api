@@ -2,9 +2,14 @@
     "compilerOptions": {
         "module": "NodeNext",
         "moduleResolution": "node",
-        "baseUrl": ".",
+        "baseUrl": "src",
         "outDir": "dist",
         "sourceMap": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "paths": {
+            "@/*": ["*"]
+        }
     }
 }
