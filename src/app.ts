@@ -7,6 +7,7 @@ import { successLogHandler, errorLogHandler } from "./config/morgan";
 import { errorHandler, errorHandlerCall } from "./middlewares/error";
 import routes from "./routes/v1";
 import connectDB from "./database";
+import insert from "./seeder/product";
 
 const app = express();
 

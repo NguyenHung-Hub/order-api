@@ -25,7 +25,7 @@ const createCookie = (tokenData: ITokenData): string => {
     return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn};`;
 };
 
-const register = async (user: IUser): Promise<IUser | string> => {
+const register = async (user: IUser): Promise<IUser> => {
     try {
         const salt = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(user.password, salt);
@@ -41,17 +41,18 @@ const register = async (user: IUser): Promise<IUser | string> => {
     }
 };
 
-const login = async (user: IUser): Promise<ILoginResponse> => {
+const login = async (
+    email: string,
+    password: string
+): Promise<ILoginResponse> => {
+    console.log(`file: auth.service.ts:50 > email:`, email);
     try {
-        const findUser: IUser = await _User.findOne({ email: user.email });
+        const findUser: IUser = await _User.findOne({ email: email });
         if (!findUser) {
-            throw new HttpException(
-                404,
-                `This email ${user.email} was not found`
-            );
+            throw new HttpException(404, `This email ${email} was not found`);
         }
         const isPasswordMatching: boolean = await compare(
-            user.password,
+            password,
             findUser.password
         );
         if (!isPasswordMatching) {
@@ -63,6 +64,7 @@ const login = async (user: IUser): Promise<ILoginResponse> => {
 
         return { cookie, user: findUser };
     } catch (error) {
+        console.log(`file: auth.service.ts:66 > error:`, error);
         throw new HttpException(500, INTERNAL_ERROR);
     }
 };

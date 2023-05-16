@@ -1,9 +1,7 @@
-import httpStatus from "http-status-codes";
 import catchAsync from "../utils/catchAsync";
 import { NextFunction, Request, Response } from "express";
 import * as authService from "../services/auth.service";
 import { CREATE_USER_FAIL } from "../config/constances";
-import IUser, { IUserResponse } from "../interfaces/user.interface";
 import { UserResponseDto } from "../dtos/user.dto";
 
 export const register = catchAsync(
@@ -21,9 +19,16 @@ export const register = catchAsync(
 
 export const login = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
-        const userData: IUser = req.body;
+        const email = req.body.email as string;
+        const password = req.body.password as string;
 
-        const { cookie, user } = await authService.login(userData);
+        console.log(
+            `file: auth.controller.ts:28 > email, password:`,
+            email,
+            password
+        );
+        const { cookie, user } = await authService.login(email, password);
+        console.log(`file: auth.controller.ts:33 > user:`, user);
 
         res.setHeader("Set-Cookie", cookie);
         res.status(200).json({ data: new UserResponseDto(user) });

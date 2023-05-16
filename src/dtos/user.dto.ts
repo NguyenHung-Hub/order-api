@@ -1,11 +1,15 @@
-import { IUserResponse } from "./../interfaces/user.interface";
+import { IRole } from "@/interfaces/role.interface";
+import { ILoginDto, IUserResponse } from "../interfaces/user.interface";
 import {
     IsEmail,
     IsNotEmpty,
     IsString,
+    Length,
     MaxLength,
     MinLength,
+    isNotEmpty,
 } from "class-validator";
+import { IArea } from "@/interfaces/area.interface";
 
 export class CreateUserDto {
     @IsEmail()
@@ -19,7 +23,16 @@ export class CreateUserDto {
     @MaxLength(20, {
         message: "Password is too long",
     })
-    public password: string;
+    password: string;
+
+    @IsString()
+    @IsNotEmpty()
+    @Length(10)
+    phone: string;
+
+    @IsString()
+    @IsNotEmpty()
+    role: string;
 }
 
 export class UserResponseDto implements IUserResponse {
@@ -29,6 +42,11 @@ export class UserResponseDto implements IUserResponse {
     phone?: string;
     avatar?: string;
     address?: string;
+
+    areas: IArea[] | [];
+    role: IRole;
+    managerId?: string;
+
     createdAt: string | object;
     updatedAt: string | object;
 
@@ -39,7 +57,20 @@ export class UserResponseDto implements IUserResponse {
         this.phone = data.phone;
         this.avatar = data.avatar;
         this.address = data.address;
+        this.areas = data.areas;
+        this.role = data.role;
+        this.managerId = data.managerId;
         this.createdAt = data.createdAt;
         this.updatedAt = data.updatedAt;
     }
+}
+
+export class LoginDto implements ILoginDto {
+    @IsEmail()
+    @IsNotEmpty()
+    email: string;
+
+    @IsString()
+    @IsNotEmpty()
+    password: string;
 }

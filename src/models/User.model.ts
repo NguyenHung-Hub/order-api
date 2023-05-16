@@ -29,6 +29,20 @@ const UserSchema: Schema = new Schema(
             type: String,
             default: "",
         },
+        areas: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Area",
+            },
+        ],
+        role: {
+            type: Schema.Types.ObjectId,
+            ref: "Role",
+        },
+        managerId: {
+            type: String,
+            default: "",
+        },
     },
     {
         timestamps: true,

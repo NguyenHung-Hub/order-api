@@ -1,0 +1,13 @@
+@baseUrl=http://localhost:8082/v1
+
+POST {{baseUrl}}/role
+Content-Type: application/json
+
+{
+    "name":"customer",
+    "description":"level-4"
+}
+
+####
+
+GET {{baseUrl}}/role

@@ -3,6 +3,10 @@ import express from "express";
 import config from "../../config";
 import homeRoute from "./home.route";
 import authRoute from "./auth.route";
+import productRoute from "./product.route";
+import categoryRoute from "./category.route";
+import areaRoute from "./area.route";
+import roleRoute from "./role.route";
 
 const router = express.Router();
 
@@ -14,6 +18,22 @@ const defaultRoutes = [
     {
         path: "/auth",
         route: authRoute,
+    },
+    {
+        path: "/product",
+        route: productRoute,
+    },
+    {
+        path: "/category",
+        route: categoryRoute,
+    },
+    {
+        path: "/area",
+        route: areaRoute,
+    },
+    {
+        path: "/role",
+        route: roleRoute,
     },
 ];
 const devRoutes = [

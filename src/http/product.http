@@ -1,0 +1,37 @@
+@baseUrl=http://localhost:8082/v1
+
+POST {{baseUrl}}/product
+Content-Type: application/json
+
+{
+    "name":"Lẩu thái siêu cay",
+    "description":"Constructs a tuple or array type from the types of a constructor function type. It produces a tuple type with all the parameter types (or the type never if Type is not a function).",
+    "photo":"https://www.cet.edu.vn/wp-content/uploads/2018/03/hinh-anh-lau-thai-chua-cay.jpg",
+    "category":"644eb58b11e67a004e8a608b",
+    "quantity":20,
+    "priceSale":109000,
+    "priceOrigin":139000
+}
+
+###
+
+POST {{baseUrl}}/product
+Content-Type: application/json
+
+{
+    "name":"Bia Budweiser - Lon",
+    "description":"Constructs a tuple or array type from the types of a constructor function type. It produces a tuple type with all the parameter types (or the type never if Type is not a functio",
+    "photo":"https://bizweb.dktcdn.net/100/401/866/products/6-lon-bia-budweiser-330ml-201912060932391376.jpg",
+    "category":"6459f7b6453248061c861104",
+    "quantity":20,
+    "priceSale":18000,
+    "priceOrigin":20000
+}
+
+###
+
+GET {{baseUrl}}/product
+###
+
+GET {{baseUrl}}/product/categories
+

@@ -1,12 +1,13 @@
-@baseUrl=http://localhost:8081/v1
+@baseUrl=http://localhost:8082/v1
 
 POST {{baseUrl}}/auth
 Content-Type: application/json
 
 {
-    "email":"hung@gmail.com",
+    "email":"dragon@gmail.com",
     "password":"1234567",
-    "phone":"0987654321"
+    "phone":"0987654123",
+    "role":"645f42f71a2d4ac3379e1646"
 }
 
 ####

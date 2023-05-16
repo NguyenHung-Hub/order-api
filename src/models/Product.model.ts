@@ -1,4 +1,5 @@
-import { Schema, model } from "mongoose";
+import { IProduct } from "@/interfaces/product.interface";
+import { Document, Schema, model } from "mongoose";
 
 const ProductSchema = new Schema(
     {
@@ -17,7 +18,7 @@ const ProductSchema = new Schema(
             required: false,
         },
 
-        categories: {
+        category: {
             type: Schema.Types.ObjectId,
             ref: "Category",
         },
@@ -26,7 +27,22 @@ const ProductSchema = new Schema(
             type: String,
             unique: true,
         },
-
+        quantity: {
+            type: Number,
+            require: true,
+        },
+        priceSale: {
+            type: Number,
+            require: true,
+        },
+        priceOrigin: {
+            type: Number,
+            require: true,
+        },
+        soldOut: {
+            type: Boolean,
+            default: false,
+        },
         hidden: {
             type: Boolean,
             default: false,
@@ -37,6 +53,6 @@ const ProductSchema = new Schema(
     }
 );
 
-const _Product = model("Product", ProductSchema);
+const _Product = model<IProduct & Document>("Product", ProductSchema);
 
 export default _Product;
