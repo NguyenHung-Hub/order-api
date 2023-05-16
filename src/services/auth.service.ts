@@ -47,7 +47,8 @@ const login = async (
 ): Promise<ILoginResponse> => {
     console.log(`file: auth.service.ts:50 > email:`, email);
     try {
-        const findUser: IUser = await _User.findOne({ email: email });
+        const findUser = await _User.findOne({ email: email }).populate("role");
+
         if (!findUser) {
             throw new HttpException(404, `This email ${email} was not found`);
         }

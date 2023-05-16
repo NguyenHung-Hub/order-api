@@ -19,7 +19,7 @@ if (config.env !== "test") {
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(compression());
+app.use(compression({ level: 7 }));
 app.use(cors());
 app.use("/v1", routes);
 app.use(errorHandlerCall);
