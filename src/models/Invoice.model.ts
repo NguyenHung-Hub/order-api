@@ -21,7 +21,7 @@ const InvoiceScheme = new Schema<IInvoice>(
             type: String,
             default: "customer",
         },
-        products: [CartSchema],
+        carts: [CartSchema],
     },
     {
         timestamps: true,

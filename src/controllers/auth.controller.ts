@@ -6,7 +6,20 @@ import { UserResponseDto } from "../dtos/user.dto";
 
 export const register = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
-        const result = await authService.register(req.body);
+        const result = await authService.register(req.body, false);
+
+        if (Object.keys(result)?.length !== 0) {
+            console.log({ data: result });
+            res.status(200).json({ status: 200, data: result });
+        } else {
+            res.status(500).json({ status: 500, error: CREATE_USER_FAIL });
+        }
+    }
+);
+
+export const registerShop = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const result = await authService.register(req.body, true);
 
         if (Object.keys(result)?.length !== 0) {
             console.log({ data: result });

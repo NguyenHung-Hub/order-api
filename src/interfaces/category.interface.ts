@@ -1,8 +1,8 @@
 import { ITimeStamps } from "./index.interface";
-import { IProduct } from "./product.interface";
 
 export interface ICategory extends ITimeStamps {
     _id?: string;
+    shopId: string;
     name: string;
     slug: string;
 }

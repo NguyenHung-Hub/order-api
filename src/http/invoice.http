@@ -1,0 +1,25 @@
+@baseUrl=http://localhost:8082/v1
+
+POST {{baseUrl}}/invoice
+Content-Type: application/json
+
+{
+    "shopId":"644e8d0de6acae48f19afc23",
+    "customerId":"645f4804db6534013260040a",
+    "customerName":"",
+    "customerPhone":"",
+    "carts":[
+        {
+            "productId":"645a51407b35831ad3c57695",
+            "quantity":2
+        },
+        {
+            "productId":"645a51407b35831ad3c57694",
+            "quantity":1
+        }
+    ]
+}
+
+####
+
+GET {{baseUrl}}/role

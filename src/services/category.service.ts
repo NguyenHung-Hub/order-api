@@ -7,7 +7,6 @@ import {
 import { HttpException } from "../exceptions/HttpException";
 import { ICategory } from "../interfaces/category.interface";
 import _Category from "../models/Category.model";
-import run from "../seeder/product";
 
 export const create = async (category: ICategory): Promise<ICategory> => {
     try {

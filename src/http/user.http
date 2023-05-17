@@ -12,6 +12,30 @@ Content-Type: application/json
 
 ####
 
+POST {{baseUrl}}/auth/register/shop
+Content-Type: application/json
+
+{
+    "email":"hung@gmail.com",
+    "password":"1234567",
+    "phone":"0987654321",
+    "role":"645f42be1a2d4ac3379e1640"
+}
+
+####
+
+POST {{baseUrl}}/auth/register/shop
+Content-Type: application/json
+
+{
+    "email":"duck@gmail.com",
+    "password":"1234567",
+    "phone":"0987654333",
+    "role":"645f42be1a2d4ac3379e1640"
+}
+
+####
+
 POST {{baseUrl}}/auth/login
 Content-Type: application/json
 

@@ -39,8 +39,9 @@ const UserSchema: Schema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Role",
         },
-        managerId: {
-            type: String,
+        shopId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
             default: "",
         },
     },

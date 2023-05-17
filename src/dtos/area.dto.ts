@@ -10,5 +10,5 @@ export class CreateAreaDto implements ICreateAreaDto {
 
     @IsString()
     @IsNotEmpty()
-    userId?: string;
+    shopId?: string;
 }

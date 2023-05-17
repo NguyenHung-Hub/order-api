@@ -11,6 +11,7 @@ import {
 import { sign } from "jsonwebtoken";
 import config from "../config";
 import { LoginResponseDto } from "../dtos/auth.dto";
+import mongoose, { Schema } from "mongoose";
 
 const createToken = (user: IUser): ITokenData => {
     const dataStoredInToken: IDataStoredInToken = { _id: user._id };
@@ -25,18 +26,23 @@ const createCookie = (tokenData: ITokenData): string => {
     return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn};`;
 };
 
-const register = async (user: IUser): Promise<IUser> => {
+const register = async (user: IUser, isShop: boolean): Promise<IUser> => {
     try {
         const salt = await bcrypt.genSalt(10);
         const hashedPass = await bcrypt.hash(user.password, salt);
 
         const newUser = { ...user, password: hashedPass };
 
-        const document = new _User(newUser);
+        const document: any = new _User(newUser);
+        if (isShop) {
+            document.shopId = new mongoose.Types.ObjectId();
+        }
+
         const saved: IUser = await document.save();
 
         return saved;
     } catch (error) {
+        console.log(`file: auth.service.ts:44 > error:`, error);
         throw new HttpException(500, CREATE_USER_FAIL);
     }
 };

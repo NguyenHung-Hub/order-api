@@ -12,7 +12,7 @@ export default interface IUser extends ITimeStamps {
     address?: string;
     areas: IArea[] | [];
     role: IRole;
-    managerId?: string;
+    shopId?: string;
 }
 
 export interface IUserResponse extends Omit<IUser, "password"> {}

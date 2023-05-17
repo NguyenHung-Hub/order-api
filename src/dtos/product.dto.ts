@@ -1,6 +1,5 @@
 import {
     ICreateProductDto,
-    IProduct,
     IProductResponse,
 } from "../interfaces/product.interface";
 import {
@@ -15,6 +14,10 @@ import {
 } from "class-validator";
 
 export class CreateProductDto implements ICreateProductDto {
+    @IsString()
+    @IsNotEmpty()
+    shopId: string;
+
     @IsString()
     @IsNotEmpty()
     @MinLength(6, { message: "Name is too short" })
@@ -55,6 +58,7 @@ export class CreateProductDto implements ICreateProductDto {
 
 export class ProductResponseDto implements IProductResponse {
     _id?: string;
+    shopId: string;
     name: string;
     description: string;
     photo: string;
@@ -70,6 +74,7 @@ export class ProductResponseDto implements IProductResponse {
 
     constructor(data: IProductResponse) {
         this._id = data._id;
+        this.shopId = data.shopId;
         this.name = data.name;
         this.description = data.description;
         this.photo = data.photo;

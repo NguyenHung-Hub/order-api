@@ -7,7 +7,6 @@ import {
     Length,
     MaxLength,
     MinLength,
-    isNotEmpty,
 } from "class-validator";
 import { IArea } from "@/interfaces/area.interface";
 
@@ -45,7 +44,7 @@ export class UserResponseDto implements IUserResponse {
 
     areas: IArea[] | [];
     role: IRole;
-    managerId?: string;
+    shopId?: string;
 
     createdAt: string | object;
     updatedAt: string | object;
@@ -59,7 +58,7 @@ export class UserResponseDto implements IUserResponse {
         this.address = data.address;
         this.areas = data.areas;
         this.role = data.role;
-        this.managerId = data.managerId;
+        this.shopId = data.shopId;
         this.createdAt = data.createdAt;
         this.updatedAt = data.updatedAt;
     }

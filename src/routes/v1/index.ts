@@ -7,6 +7,7 @@ import productRoute from "./product.route";
 import categoryRoute from "./category.route";
 import areaRoute from "./area.route";
 import roleRoute from "./role.route";
+import invoiceRoute from "./invoice.route";
 
 const router = express.Router();
 
@@ -34,6 +35,10 @@ const defaultRoutes = [
     {
         path: "/role",
         route: roleRoute,
+    },
+    {
+        path: "/invoice",
+        route: invoiceRoute,
     },
 ];
 const devRoutes = [

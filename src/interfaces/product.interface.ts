@@ -3,6 +3,7 @@ import { ITimeStamps } from "./index.interface";
 
 export interface IProduct extends ITimeStamps {
     _id?: string;
+    shopId: string;
     name: string;
     description: string;
     photo: string;

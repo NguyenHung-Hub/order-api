@@ -3,6 +3,11 @@ import { Document, Schema, model } from "mongoose";
 
 const ProductSchema = new Schema(
     {
+        shopId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
         name: {
             type: String,
             required: true,
