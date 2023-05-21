@@ -8,6 +8,10 @@ export const CartSchema = new Schema(
             ref: "Product",
             require: true,
         },
+        price: {
+            type: Number,
+            require: true,
+        },
         quantity: {
             type: Number,
             require: true,

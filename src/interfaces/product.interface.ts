@@ -9,7 +9,6 @@ export interface IProduct extends ITimeStamps {
     photo: string;
     category: string;
     slug: string;
-    quantity: number;
     priceSale: number;
     priceOrigin: number;
     soldOut: boolean;
@@ -23,7 +22,6 @@ export interface ICreateProductDto
         | "description"
         | "photo"
         | "category"
-        | "quantity"
         | "priceSale"
         | "priceOrigin"
     > {}

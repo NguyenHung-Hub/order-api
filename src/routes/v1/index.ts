@@ -9,6 +9,7 @@ import areaRoute from "./area.route";
 import roleRoute from "./role.route";
 import invoiceRoute from "./invoice.route";
 import shopRoute from "./shop.route";
+import dashboardRoute from "./dashboard.route";
 
 const router = express.Router();
 
@@ -44,6 +45,10 @@ const defaultRoutes = [
     {
         path: "/shop",
         route: shopRoute,
+    },
+    {
+        path: "/dashboard",
+        route: dashboardRoute,
     },
 ];
 const devRoutes = [

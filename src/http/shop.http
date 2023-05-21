@@ -1,0 +1,10 @@
+@baseUrl=http://localhost:8082/v1
+
+POST {{baseUrl}}/shop
+Content-Type: application/json
+
+{
+    "name":"NguyenHung",
+    "address":"Hoc Mon, HCM",
+    "logo":"https://img.freepik.com/premium-vector/chef-food-restaurant-logo_7085-179.jpg"
+}

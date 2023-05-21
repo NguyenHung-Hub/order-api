@@ -22,4 +22,4 @@ Content-Type: application/json
 
 ####
 
-GET {{baseUrl}}/role
+GET {{baseUrl}}/invoice?userId=645f4804db6534013260040a

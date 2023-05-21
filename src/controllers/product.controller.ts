@@ -2,7 +2,7 @@ import catchAsync from "../utils/catchAsync";
 import { Request, Response, NextFunction } from "express";
 import * as productService from "../services/product.service";
 import { IProduct } from "../interfaces/product.interface";
-import { IProductsByCategories } from "@/interfaces/product.interface";
+import { IProductsByCategories } from "@interfaces/product.interface";
 
 export const create = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {

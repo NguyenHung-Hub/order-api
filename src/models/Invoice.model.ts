@@ -1,25 +1,25 @@
-import { IInvoice } from "@/interfaces/invoice.interface";
+import { IInvoice } from "@interfaces/invoice.interface";
 import { Document, Schema, model } from "mongoose";
 import { CartSchema } from "./Cart.model";
 
-const InvoiceScheme = new Schema<IInvoice>(
+const InvoiceScheme = new Schema(
     {
         shopId: {
-            type: String,
+            type: Schema.Types.ObjectId,
             required: true,
             ref: "User",
         },
         customerId: {
-            type: String,
+            type: Schema.Types.ObjectId,
             default: "id",
         },
         customerName: {
             type: String,
-            default: "name",
+            default: "",
         },
         customerPhone: {
             type: String,
-            default: "customer",
+            default: "",
         },
         carts: [CartSchema],
     },

@@ -8,8 +8,18 @@
         "noImplicitAny": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+
         "paths": {
-            "@/*": ["*"]
+            "@models/*": ["models/*"],
+            "@interfaces/*": ["interfaces/*"],
+            "@services/*": ["services/*"],
+            "@utils/*": ["utils/*"],
+            "@dtos/*": ["dtos/*"],
+            "@controllers/*": ["controllers/*"],
+            "@config/*": ["config/*"]
         }
+    },
+    "ts-node": {
+        "require": ["tsconfig-paths/register"]
     }
 }

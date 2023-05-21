@@ -1,4 +1,4 @@
-import { IProduct } from "@/interfaces/product.interface";
+import { IProduct } from "@interfaces/product.interface";
 import { Document, Schema, model } from "mongoose";
 
 const ProductSchema = new Schema(
@@ -31,10 +31,6 @@ const ProductSchema = new Schema(
         slug: {
             type: String,
             unique: true,
-        },
-        quantity: {
-            type: Number,
-            require: true,
         },
         priceSale: {
             type: Number,

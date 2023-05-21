@@ -64,7 +64,6 @@ export class ProductResponseDto implements IProductResponse {
     photo: string;
     category: string;
     slug: string;
-    quantity: number;
     priceSale: number;
     priceOrigin: number;
     soldOut: boolean;
@@ -80,7 +79,6 @@ export class ProductResponseDto implements IProductResponse {
         this.photo = data.photo;
         this.category = data.category;
         this.slug = data.slug;
-        this.quantity = data.quantity;
         this.priceSale = data.priceSale;
         this.priceOrigin = data.priceOrigin;
         this.soldOut = data.soldOut;
