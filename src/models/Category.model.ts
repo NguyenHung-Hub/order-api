@@ -14,7 +14,6 @@ const CategorySchema = new Schema(
         },
         slug: {
             type: String,
-            unique: true,
         },
     },
     {

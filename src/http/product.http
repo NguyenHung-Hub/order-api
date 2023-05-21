@@ -4,9 +4,9 @@ POST {{baseUrl}}/product
 Content-Type: application/json
 
 {
-    "name":"Lẩu thái siêu cay",
-    "description":"Constructs a tuple or array type from the types of a constructor function type. It produces a tuple type with all the parameter types (or the type never if Type is not a function).",
-    "photo":"https://www.cet.edu.vn/wp-content/uploads/2018/03/hinh-anh-lau-thai-chua-cay.jpg",
+    "name":"Gà nướng BBQ",
+    "description":"Món gà sốt BBQ thật thơm ngon, đậm vị khó cưỡng lại được, đây chắc chắn là một món ăn được nhiều người ưa thích.",
+    "photo":"https://bepvietnam.vn/public/files/editor-upload/files/cach-uop-ga-nuong-BBQ-1.jpg",
     "category":"644eb58b11e67a004e8a608b",
     "quantity":20,
     "priceSale":109000,

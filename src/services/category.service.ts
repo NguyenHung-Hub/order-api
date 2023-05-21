@@ -7,11 +7,16 @@ import {
 import { HttpException } from "../exceptions/HttpException";
 import { ICategory } from "../interfaces/category.interface";
 import _Category from "../models/Category.model";
+import { Types } from "mongoose";
 
 export const create = async (category: ICategory): Promise<ICategory> => {
     try {
         const slug = slugify(category.name, { lower: true });
-        const newCategory = new _Category({ ...category, slug });
+        const newCategory = new _Category({
+            ...category,
+            shopId: new Types.ObjectId(category.shopId),
+            slug,
+        });
         const saved: ICategory = await newCategory.save();
         return saved;
     } catch (error) {
