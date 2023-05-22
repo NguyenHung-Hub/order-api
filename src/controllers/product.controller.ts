@@ -30,9 +30,10 @@ export const get = catchAsync(
 export const getByCategories = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         const size = Number(req.query.size) || 5;
+        const shopId = req.query.shopId as string;
 
         const result: IProductsByCategories[] =
-            await productService.getProductsByCategories(size);
+            await productService.getProductsByCategories(shopId, size);
 
         res.status(200).json({ data: result });
     }

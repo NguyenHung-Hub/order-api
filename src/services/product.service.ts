@@ -6,6 +6,7 @@ import _Product from "../models/Product.model";
 import _Category from "../models/Category.model";
 
 import slugify from "slugify";
+import { Types } from "mongoose";
 
 export const create = async (product: IProduct): Promise<IProduct> => {
     try {
@@ -61,16 +62,20 @@ export const getBySlug = async (slug: string): Promise<IProduct> => {
 };
 
 export const getProductsByCategories = async (
+    shopId: string,
     size: number
 ): Promise<IProductsByCategories[]> => {
     try {
         const result = await _Category.aggregate([
             {
+                $match: { shopId: new Types.ObjectId(shopId) },
+            },
+            {
                 $lookup: {
                     from: "products",
                     localField: "_id",
                     foreignField: "category",
-                    pipeline: [{ $sample: { size: 5 } }],
+                    pipeline: [{ $sample: { size: size } }],
                     as: "products",
                 },
             },
