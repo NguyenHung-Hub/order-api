@@ -41,7 +41,7 @@ const UserSchema: Schema = new Schema(
         },
         shopId: {
             type: Schema.Types.ObjectId,
-            ref: "User",
+            ref: "Shop",
             default: "",
         },
     },

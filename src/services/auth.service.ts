@@ -1,5 +1,5 @@
 import _User from "../models/User.model";
-import IUser from "../interfaces/user.interface";
+import IUser, { IUserResponse } from "../interfaces/user.interface";
 import bcrypt, { compare } from "bcrypt";
 import { CREATE_USER_FAIL, INTERNAL_ERROR } from "../config/constances";
 import { HttpException } from "../exceptions/HttpException";
@@ -12,8 +12,10 @@ import { sign } from "jsonwebtoken";
 import config from "../config";
 import { LoginResponseDto } from "../dtos/auth.dto";
 import mongoose, { Schema } from "mongoose";
+import { UserResponseDto } from "@dtos/user.dto";
+import { IUserDocument } from "@interfaces/user.interface";
 
-const createToken = (user: IUser): ITokenData => {
+const createToken = (user: IUserDocument): ITokenData => {
     const dataStoredInToken: IDataStoredInToken = { _id: user._id };
     const expiresIn = 60 * 60;
     return {
@@ -53,7 +55,12 @@ const login = async (
 ): Promise<ILoginResponse> => {
     console.log(`file: auth.service.ts:50 > email:`, email);
     try {
-        const findUser = await _User.findOne({ email: email }).populate("role");
+        const findUser = await _User
+            .findOne({ email: email })
+            .populate("role")
+            .populate<IUserDocument>("shopId");
+
+        console.log("61::::::::::::", findUser);
 
         if (!findUser) {
             throw new HttpException(404, `This email ${email} was not found`);
@@ -69,7 +76,7 @@ const login = async (
         const token = createToken(findUser);
         const cookie = createCookie(token);
 
-        return { cookie, user: findUser };
+        return { cookie, user: new UserResponseDto(findUser) };
     } catch (error) {
         console.log(`file: auth.service.ts:66 > error:`, error);
         throw new HttpException(500, INTERNAL_ERROR);

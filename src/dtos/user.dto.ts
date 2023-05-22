@@ -1,5 +1,9 @@
 import { IRole } from "@interfaces/role.interface";
-import { ILoginDto, IUserResponse } from "../interfaces/user.interface";
+import IUser, {
+    ILoginDto,
+    IUserDocument,
+    IUserResponse,
+} from "../interfaces/user.interface";
 import {
     IsEmail,
     IsNotEmpty,
@@ -9,6 +13,7 @@ import {
     MinLength,
 } from "class-validator";
 import { IArea } from "@interfaces/area.interface";
+import { IShop } from "@interfaces/shop.interface";
 
 export class CreateUserDto {
     @IsEmail()
@@ -36,20 +41,18 @@ export class CreateUserDto {
 
 export class UserResponseDto implements IUserResponse {
     _id?: string;
-    email: string;
     fullName?: string;
+    email: string;
     phone?: string;
     avatar?: string;
     address?: string;
-
     areas: IArea[] | [];
     role: IRole;
-    shopId?: string;
-
+    shop: IShop;
     createdAt: string | object;
     updatedAt: string | object;
 
-    constructor(data: IUserResponse) {
+    constructor(data: IUserDocument) {
         this._id = data._id;
         this.email = data.email;
         this.fullName = data.fullName;
@@ -58,7 +61,7 @@ export class UserResponseDto implements IUserResponse {
         this.address = data.address;
         this.areas = data.areas;
         this.role = data.role;
-        this.shopId = data.shopId;
+        this.shop = data.shopId;
         this.createdAt = data.createdAt;
         this.updatedAt = data.updatedAt;
     }

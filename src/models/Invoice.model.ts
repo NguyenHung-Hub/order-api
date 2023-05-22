@@ -7,7 +7,7 @@ const InvoiceScheme = new Schema(
         shopId: {
             type: Schema.Types.ObjectId,
             required: true,
-            ref: "User",
+            ref: "Shop",
         },
         customerId: {
             type: Schema.Types.ObjectId,

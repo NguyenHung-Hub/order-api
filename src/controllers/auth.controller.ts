@@ -44,6 +44,6 @@ export const login = catchAsync(
         console.log(`file: auth.controller.ts:33 > user:`, user);
 
         res.setHeader("Set-Cookie", cookie);
-        res.status(200).json({ data: new UserResponseDto(user) });
+        res.status(200).json({ data: user });
     }
 );

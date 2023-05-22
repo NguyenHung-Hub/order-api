@@ -39,12 +39,6 @@ export class CreateProductDto implements ICreateProductDto {
 
     @IsNumber()
     @IsNotEmpty()
-    @Min(0)
-    @Max(500)
-    quantity: number;
-
-    @IsNumber()
-    @IsNotEmpty()
     @Min(1000)
     @Max(10000000)
     priceSale: number;

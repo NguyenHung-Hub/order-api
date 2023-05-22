@@ -12,7 +12,7 @@ const TableScheme = new Schema(
 
 const AreaSchema = new Schema(
     {
-        shopId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+        shopId: { type: Schema.Types.ObjectId, ref: "Shop", required: true },
         name: { type: String, required: true },
         slug: { type: String, required: true },
         tables: [TableScheme],
