@@ -33,6 +33,17 @@ Content-Type: application/json
     "phone":"0987654333",
     "role":"645f42be1a2d4ac3379e1640"
 }
+####
+
+POST {{baseUrl}}/auth/register/shop
+Content-Type: application/json
+
+{
+    "email":"Nata@gmail.com",
+    "password":"1234567",
+    "phone":"0987654888",
+    "role":"645f42da1a2d4ac3379e1642"
+}
 
 ####
 

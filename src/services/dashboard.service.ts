@@ -83,6 +83,6 @@ export const get = async (
 
         return response;
     } catch (error) {
-        console.log(`file: dashboard.service.ts:66 > error:`, error);
+        console.log(`file: dashboard.service.ts:86 > error:`, error);
     }
 };

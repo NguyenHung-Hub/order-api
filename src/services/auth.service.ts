@@ -53,14 +53,11 @@ const login = async (
     email: string,
     password: string
 ): Promise<ILoginResponse> => {
-    console.log(`file: auth.service.ts:50 > email:`, email);
     try {
         const findUser = await _User
             .findOne({ email: email })
             .populate("role")
             .populate<IUserDocument>("shopId");
-
-        console.log("61::::::::::::", findUser);
 
         if (!findUser) {
             throw new HttpException(404, `This email ${email} was not found`);

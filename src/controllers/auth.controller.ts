@@ -35,13 +35,7 @@ export const login = catchAsync(
         const email = req.body.email as string;
         const password = req.body.password as string;
 
-        console.log(
-            `file: auth.controller.ts:28 > email, password:`,
-            email,
-            password
-        );
         const { cookie, user } = await authService.login(email, password);
-        console.log(`file: auth.controller.ts:33 > user:`, user);
 
         res.setHeader("Set-Cookie", cookie);
         res.status(200).json({ data: user });

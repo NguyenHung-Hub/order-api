@@ -4,7 +4,7 @@ import { HttpException } from "../exceptions/HttpException";
 import { IInvoice, IInvoiceResponse } from "../interfaces/invoice.interface";
 import _Invoice from "../models/Invoice.model";
 
-export const create = async (invoice: IInvoice): Promise<IInvoice> => {
+export const create = async (invoice: IInvoice): Promise<IInvoiceResponse> => {
     try {
         const tempCarts = invoice.carts.map((cart) => {
             return {
@@ -17,28 +17,38 @@ export const create = async (invoice: IInvoice): Promise<IInvoice> => {
         const tempInvoice = {
             shopId: new mongoose.Types.ObjectId(invoice.shopId),
             customerId: new mongoose.Types.ObjectId(invoice.customerId),
+            customerName: invoice.customerName || "",
+            customerPhone: invoice.customerPhone || "",
             carts: tempCarts,
         };
-        console.log(`file: invoice.service.ts:21 > tempInvoice:`, tempInvoice);
 
         const newInvoice = new _Invoice({ ...tempInvoice });
         const saved: IInvoice = await newInvoice.save();
-        return saved;
+        const response: IInvoiceResponse[] = await get(saved._id, "invoiceId");
+
+        return response[0] as unknown as IInvoiceResponse;
     } catch (error) {
         console.log(`file: category.service.ts:16 > error:`, error);
         throw new HttpException(500, INTERNAL_ERROR);
     }
 };
 
-export const getByUser = async (
-    userId: string
-): Promise<IInvoiceResponse | undefined> => {
-    console.log(`file: invoice.service.ts:20 > userId:`, userId);
-    const id = new mongoose.Types.ObjectId(userId);
+export const get = async (
+    id: string,
+    type: "customerId" | "invoiceId" | "shopId"
+): Promise<IInvoiceResponse[] | undefined> => {
+    let match;
+
+    if (type == "invoiceId") {
+        match = { _id: id };
+    } else {
+        match = { [type]: new Types.ObjectId(id) };
+    }
+
     try {
         const result = await _Invoice.aggregate([
             {
-                $match: { customerId: id },
+                $match: match,
             },
             {
                 $lookup: {
@@ -79,12 +89,14 @@ export const getByUser = async (
             {
                 $unset: "carts.productId",
             },
+            {
+                $sort: { createdAt: -1 },
+            },
         ]);
 
-        console.log(`file: invoice.service.ts:68 > result:`, result);
-        return result as unknown as IInvoiceResponse;
+        return result as unknown as IInvoiceResponse[];
     } catch (error) {
-        console.log(`file: invoice.service.ts:70 > error:`, error);
+        console.log(`file: invoice.service.ts:142 > error:`, error);
         throw new HttpException(500, INTERNAL_ERROR);
     }
 };

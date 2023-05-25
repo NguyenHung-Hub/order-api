@@ -62,13 +62,24 @@ export const getBySlug = async (slug: string): Promise<IProduct> => {
 };
 
 export const getProductsByCategories = async (
-    shopId: string,
+    shopName: string,
     size: number
 ): Promise<IProductsByCategories[]> => {
     try {
         const result = await _Category.aggregate([
             {
-                $match: { shopId: new Types.ObjectId(shopId) },
+                $lookup: {
+                    from: "shops",
+                    localField: "shopId",
+                    foreignField: "_id",
+                    as: "shop",
+                },
+            },
+            {
+                $unwind: "$shop",
+            },
+            {
+                $match: { "shop.name": shopName },
             },
             {
                 $lookup: {
@@ -78,6 +89,9 @@ export const getProductsByCategories = async (
                     pipeline: [{ $sample: { size: size } }],
                     as: "products",
                 },
+            },
+            {
+                $unset: "shop",
             },
         ]);
 

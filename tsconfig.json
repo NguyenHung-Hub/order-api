@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "module": "NodeNext",
+        "target": "ES6",
         "moduleResolution": "node",
         "baseUrl": "src",
         "outDir": "dist",
@@ -16,7 +17,8 @@
             "@utils/*": ["utils/*"],
             "@dtos/*": ["dtos/*"],
             "@controllers/*": ["controllers/*"],
-            "@config/*": ["config/*"]
+            "@config/*": ["config/*"],
+            "@socket/*": ["socket/*"]
         }
     },
     "ts-node": {
