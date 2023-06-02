@@ -1,16 +1,20 @@
 import mongoose, { Types } from "mongoose";
-import { INTERNAL_ERROR } from "../config/constances";
+import {
+    INTERNAL_ERROR,
+    NOT_FOUND_INVOICE,
+    UPDATE_INVOICE_FAIL,
+} from "../config/constances";
 import { HttpException } from "../exceptions/HttpException";
 import { IInvoice, IInvoiceResponse } from "../interfaces/invoice.interface";
 import _Invoice from "../models/Invoice.model";
 
 export const create = async (invoice: IInvoice): Promise<IInvoiceResponse> => {
     try {
-        const tempCarts = invoice.carts.map((cart) => {
+        const tempItems = invoice.items.map((item) => {
             return {
-                productId: new Types.ObjectId(cart.productId),
-                price: cart.price,
-                quantity: cart.quantity,
+                productId: new Types.ObjectId(item.productId),
+                quantity: item.quantity,
+                status: item.status || "waitingFood",
             };
         });
 
@@ -19,7 +23,8 @@ export const create = async (invoice: IInvoice): Promise<IInvoiceResponse> => {
             customerId: new mongoose.Types.ObjectId(invoice.customerId),
             customerName: invoice.customerName || "",
             customerPhone: invoice.customerPhone || "",
-            carts: tempCarts,
+            items: tempItems,
+            status: invoice.status,
         };
 
         const newInvoice = new _Invoice({ ...tempInvoice });
@@ -53,29 +58,31 @@ export const get = async (
             {
                 $lookup: {
                     from: "products",
-                    localField: "carts.productId",
+                    localField: "items.productId",
                     foreignField: "_id",
                     as: "temp",
                 },
             },
             {
                 $set: {
-                    carts: {
+                    items: {
                         $map: {
-                            input: "$carts",
+                            input: "$items",
                             in: {
                                 $mergeObjects: [
                                     "$$this",
                                     {
-                                        $arrayElemAt: [
-                                            "$temp",
-                                            {
-                                                $indexOfArray: [
-                                                    "$temp._id",
-                                                    "$$this.productId",
-                                                ],
-                                            },
-                                        ],
+                                        product: {
+                                            $arrayElemAt: [
+                                                "$temp",
+                                                {
+                                                    $indexOfArray: [
+                                                        "$temp._id",
+                                                        "$$this.productId",
+                                                    ],
+                                                },
+                                            ],
+                                        },
                                     },
                                 ],
                             },
@@ -87,10 +94,13 @@ export const get = async (
                 $unset: "temp",
             },
             {
-                $unset: "carts.productId",
+                $unset: "items.productId",
             },
             {
-                $sort: { createdAt: -1 },
+                $unset: "items.price",
+            },
+            {
+                $sort: { createdAt: 1 },
             },
         ]);
 
@@ -98,5 +108,40 @@ export const get = async (
     } catch (error) {
         console.log(`file: invoice.service.ts:142 > error:`, error);
         throw new HttpException(500, INTERNAL_ERROR);
+    }
+};
+
+export const update = async (
+    invoice: IInvoice
+): Promise<IInvoiceResponse | undefined> => {
+    try {
+        const findInvoice = await _Invoice.findById(invoice._id);
+
+        if (!findInvoice) {
+            throw new HttpException(500, NOT_FOUND_INVOICE);
+        }
+
+        const updateInvoice = await _Invoice.findOneAndUpdate(
+            { _id: invoice._id },
+            {
+                $set: {
+                    customerName: invoice.customerName,
+                    customerPhone: invoice.customerPhone,
+                    status: invoice.status,
+                    items: invoice.items,
+                },
+            },
+            { new: true }
+        );
+
+        const response: IInvoiceResponse[] = await get(
+            updateInvoice._id,
+            "invoiceId"
+        );
+
+        return response[0] as unknown as IInvoiceResponse;
+    } catch (error) {
+        console.log(`file: area.service.ts:136 > error:`, error);
+        throw new HttpException(500, UPDATE_INVOICE_FAIL);
     }
 };

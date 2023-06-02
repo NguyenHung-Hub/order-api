@@ -1,4 +1,4 @@
-import { ICart } from "../interfaces/cart.interface";
+import { IInvoiceItem } from "../interfaces/invoice.interface";
 import { Schema, model } from "mongoose";
 
 export const CartSchema = new Schema(
@@ -8,13 +8,18 @@ export const CartSchema = new Schema(
             ref: "Product",
             require: true,
         },
-        price: {
-            type: Number,
-            require: true,
-        },
+
         quantity: {
             type: Number,
             require: true,
+        },
+        status: {
+            type: String,
+            enum: {
+                values: ["waitingFood", "finishFood", "finish", "cancel"],
+                default: "waitingFood",
+                message: "{VALUE} is not supported",
+            },
         },
     },
     {
@@ -22,6 +27,6 @@ export const CartSchema = new Schema(
     }
 );
 
-const _Cart = model<ICart & Document>("Cart", CartSchema);
+const _Cart = model<IInvoiceItem & Document>("Cart", CartSchema);
 
 export default _Cart;

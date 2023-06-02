@@ -24,7 +24,7 @@ const connectDB = async () => {
             } as ConnectOptions
         );
 
-        // connect.set("debug", true);
+        connect.set("debug", true);
 
         // console.log(">>> connect: ", connect);
         console.log("MongoDB connected!!");

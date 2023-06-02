@@ -21,7 +21,15 @@ const InvoiceScheme = new Schema(
             type: String,
             default: "",
         },
-        carts: [CartSchema],
+        status: {
+            type: String,
+            enum: {
+                values: ["waitingConfirm", "serving", "finish", "cancel"],
+                default: "waitingConfirm",
+                message: "{VALUE} is not supported",
+            },
+        },
+        items: [CartSchema],
     },
     {
         timestamps: true,

@@ -21,5 +21,39 @@ Content-Type: application/json
 }
 
 ####
+PUT {{baseUrl}}/invoice
+Content-Type: application/json
 
-GET {{baseUrl}}/invoice?userId=645f4804db6534013260040a
+{
+    "_id":"646f13c7284687cd64bedfc6",
+    "shopId":"64664f7a0451c8fd97b8e975",
+    "customerId":"645f4804db6534013260040a",
+    "customerName":"Dragon20",
+    "customerPhone":"0987654123",
+    "status":"waiting",
+    "carts":[
+        {
+            "productId":"645a77d9edb0ce45b505c815",
+            "price": 89000,
+            "quantity": 6,
+            "_id": "645a77d9edb0ce45b505c815",
+            "name": "Lẩu chay",
+            "description": "Trong danh sách các món lẩu ngon dễ làm, chắc chắn bạn không thể bỏ qua lẩu chay. Đây là món lẩu dành riêng cho những người ăn kiêng cũng như ăn chay. Bạn sẽ không thể cảm thấy chán ngán với thịt cá mà trong khi đó nước lẩu vẫn đậm là thơm ngon. ",
+            "photo": "https://food.com.vn/upload/lau-chay.jpg",
+            "category": "644eb58b11e67a004e8a608b",
+            "slug": "Lau-chay",
+            "priceSale": 89000,
+            "priceOrigin": 110000,
+            "soldOut": false,
+            "hidden": false,
+            "__v": 0,
+            "createdAt": "2023-05-09T16:42:01.964Z",
+            "updatedAt": "2023-05-09T16:42:01.964Z",
+            "shopId": "64650c8f83d6308dca125f39"
+        }
+    ]
+}
+
+####
+
+GET {{baseUrl}}/invoice?shopId=64664f7a0451c8fd97b8e975

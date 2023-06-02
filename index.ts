@@ -6,6 +6,7 @@ import { Server } from "socket.io";
 import Websocket from "@socket/websocket";
 import InvoiceSocket from "@socket/invoice.socket";
 import WaiterSocket from "@socket/waiter.socket";
+import ChefSocket from "@socket/chef.socket";
 
 let server = http.createServer(app);
 const io = Websocket.getInstance(server);
@@ -16,6 +17,7 @@ io.on("connection", (socket) => {
 io.initializeHandlers([
     { path: "/invoice", handler: new InvoiceSocket() },
     { path: "/waiter", handler: new WaiterSocket() },
+    { path: "/chef", handler: new ChefSocket() },
 ]);
 server.listen(config.port, () => {
     logger.info(`Server listening on port ${config.port}`);

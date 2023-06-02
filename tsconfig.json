@@ -15,6 +15,7 @@
             "@interfaces/*": ["interfaces/*"],
             "@services/*": ["services/*"],
             "@utils/*": ["utils/*"],
+            "@middlewares/*": ["middlewares/*"],
             "@dtos/*": ["dtos/*"],
             "@controllers/*": ["controllers/*"],
             "@config/*": ["config/*"],
