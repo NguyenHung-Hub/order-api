@@ -1,17 +1,24 @@
-import { IInvoiceItemBase } from "@interfaces/invoice.interface";
+import {
+    IInvoiceItemBase,
+    IUpdateQuantityDeliveredDto,
+    IUpdateQuantityDone,
+    IUpdateQuantityDoneDto,
+    TInvoiceItemStatus,
+} from "@interfaces/invoice.interface";
 import {
     IUpdateInvoiceDto,
     TInvoiceStatus,
 } from "@interfaces/invoice.interface";
-import { Transform, Type, plainToClass } from "class-transformer";
 import {
     IsArray,
     IsNotEmpty,
+    IsNumber,
     IsOptional,
     IsString,
     ValidateNested,
 } from "class-validator";
 import { CartBase } from "./cart.dto";
+import { IAreaResponse } from "@interfaces/area.interface";
 
 export class UpdateInvoiceDto implements IUpdateInvoiceDto {
     @IsNotEmpty()
@@ -41,4 +48,30 @@ export class UpdateInvoiceDto implements IUpdateInvoiceDto {
     @IsOptional()
     @IsArray()
     items: IInvoiceItemBase[];
+
+    @IsNotEmpty()
+    area: IAreaResponse;
+}
+
+export class UpdateQuantityDone implements IUpdateQuantityDoneDto {
+    @IsOptional()
+    @IsArray()
+    items: IUpdateQuantityDone[];
+}
+export class UpdateQuantityDelivered implements IUpdateQuantityDeliveredDto {
+    @IsNotEmpty()
+    @IsString()
+    invoiceId: string;
+
+    @IsNotEmpty()
+    @IsString()
+    productId: string;
+
+    @IsNotEmpty()
+    @IsNumber()
+    quantity: number;
+
+    @IsNotEmpty()
+    @IsString()
+    status: TInvoiceItemStatus;
 }

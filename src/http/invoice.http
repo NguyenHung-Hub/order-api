@@ -57,3 +57,23 @@ Content-Type: application/json
 ####
 
 GET {{baseUrl}}/invoice?shopId=64664f7a0451c8fd97b8e975
+
+### update quantity done
+
+PATCH  {{baseUrl}}/invoice/647b0e27cd282792c89eee7e/done
+Content-Type: application/json
+
+{
+    "items":[
+        {
+            "invoiceId":"647dabcf984cd96a653d5d96",
+            "productId":"645b7f8956daab3a28e10ebd",
+            "quantity": 3
+        },
+        {
+            "invoiceId":"647dabee984cd96a653d5d9b",
+            "productId":"645b7f8956daab3a28e10ebd",
+            "quantity": 2
+        }
+    ]
+}

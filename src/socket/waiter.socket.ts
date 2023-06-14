@@ -24,6 +24,13 @@ class WaiterSocket implements ISocket {
             socket.to(room).emit("newOrder", data);
             console.log(`file: waiter.socket.ts:25 > room:`, room);
         });
+
+        socket.on("sendInvoiceItemDone", (data) => {
+            console.log(`file: waiter.socket.ts:29 > data:`, data);
+            const room = `${data[0].shopId.toString()}_waiter`;
+            socket.to(room).emit("receiveInvoiceItemDone", data);
+            console.log(`file: waiter.socket.ts:31 > room:`, room);
+        });
     }
 
     middleware(socket: Socket, next: any) {

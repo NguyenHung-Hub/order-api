@@ -6,6 +6,7 @@ import { IInvoice, IInvoiceResponse } from "../interfaces/invoice.interface";
 export const create = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         const result: IInvoiceResponse = await invoiceService.create(req.body);
+        console.log(`file: invoice.controller.ts:9 > result:`, result);
 
         res.status(200).json({ data: result });
     }
@@ -28,11 +29,6 @@ export const get = catchAsync(
         }
 
         const result: IInvoiceResponse[] = await invoiceService.get(id, type);
-        console.log(
-            `file: invoice.controller.ts:31 > result:`,
-            result[3].items,
-            result[3].updatedAt
-        );
 
         res.status(200).json({ data: result });
     }
@@ -41,6 +37,24 @@ export const get = catchAsync(
 export const update = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {
         const result: IInvoiceResponse = await invoiceService.update(req.body);
+
+        res.status(200).json({ data: result });
+    }
+);
+
+export const updateQuantityDone = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const result: IInvoiceResponse[] =
+            await invoiceService.updateQuantityDone(req.body.items);
+
+        res.status(200).json({ data: result });
+    }
+);
+
+export const updateQuantityDelivered = catchAsync(
+    async (req: Request, res: Response, next: NextFunction) => {
+        const result: IInvoiceResponse[] =
+            await invoiceService.updateQuantityDelivered(req.body);
 
         res.status(200).json({ data: result });
     }

@@ -1,7 +1,13 @@
+import { IAreaInfo, IAreaResponse } from "./area.interface";
 import { ITimeStamps } from "./index.interface";
 import { IProduct } from "./product.interface";
 
-export type TInvoiceStatus = "waitingConfirm" | "serving" | "finish" | "cancel";
+export type TInvoiceStatus =
+    | "waitingConfirm"
+    | "serving"
+    | "delivered"
+    | "finish"
+    | "cancel";
 export type TInvoiceItemStatus =
     | "waitingFood"
     | "finishFood"
@@ -10,6 +16,8 @@ export type TInvoiceItemStatus =
 
 export interface IInvoiceItemBase {
     quantity: number;
+    done?: number;
+    delivered?: number;
     status: TInvoiceItemStatus;
 }
 
@@ -26,6 +34,7 @@ interface IInvoiceBase {
 }
 export interface IInvoice extends ITimeStamps, IInvoiceBase {
     items: IInvoiceItem[];
+    area: IAreaInfo;
 }
 
 export interface IInvoiceItemResponse extends IInvoiceItemBase {
@@ -34,8 +43,23 @@ export interface IInvoiceItemResponse extends IInvoiceItemBase {
 
 export interface IInvoiceResponse extends ITimeStamps, IInvoiceBase {
     items: IInvoiceItemResponse[];
+    area: IAreaResponse;
 }
 
 export interface IUpdateInvoiceDto extends IInvoiceBase {
     items: IInvoiceItemBase[];
 }
+
+export interface IUpdateQuantityDone {
+    invoiceId: string;
+    productId: string;
+    quantity: number;
+    status: TInvoiceItemStatus;
+}
+
+export interface IUpdateQuantityDelivered extends IUpdateQuantityDone {}
+
+export interface IUpdateQuantityDoneDto {
+    items: IUpdateQuantityDone[];
+}
+export interface IUpdateQuantityDeliveredDto extends IUpdateQuantityDelivered {}

@@ -24,12 +24,22 @@ const InvoiceScheme = new Schema(
         status: {
             type: String,
             enum: {
-                values: ["waitingConfirm", "serving", "finish", "cancel"],
+                values: [
+                    "waitingConfirm",
+                    "serving",
+                    "delivered",
+                    "finish",
+                    "cancel",
+                ],
                 default: "waitingConfirm",
                 message: "{VALUE} is not supported",
             },
         },
         items: [CartSchema],
+        area: {
+            areaId: { type: Schema.Types.ObjectId, ref: "Area" },
+            tableId: { type: Schema.Types.ObjectId },
+        },
     },
     {
         timestamps: true,

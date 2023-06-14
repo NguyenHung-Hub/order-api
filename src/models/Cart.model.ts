@@ -13,6 +13,24 @@ export const CartSchema = new Schema(
             type: Number,
             require: true,
         },
+        done: {
+            type: Number,
+            default: 0,
+            validate: [
+                function (value: number) {
+                    return value <= this.quantity;
+                },
+            ],
+        },
+        delivered: {
+            type: Number,
+            default: 0,
+            validate: [
+                function (value: number) {
+                    return value <= this.done;
+                },
+            ],
+        },
         status: {
             type: String,
             enum: {

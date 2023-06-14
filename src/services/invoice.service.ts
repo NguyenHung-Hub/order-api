@@ -1,14 +1,23 @@
 import mongoose, { Types } from "mongoose";
+import async from "async";
+
 import {
     INTERNAL_ERROR,
     NOT_FOUND_INVOICE,
     UPDATE_INVOICE_FAIL,
 } from "../config/constances";
 import { HttpException } from "../exceptions/HttpException";
-import { IInvoice, IInvoiceResponse } from "../interfaces/invoice.interface";
+import {
+    IInvoice,
+    IUpdateQuantityDone,
+    IInvoiceResponse,
+    IUpdateQuantityDoneDto,
+    IUpdateQuantityDelivered,
+} from "../interfaces/invoice.interface";
 import _Invoice from "../models/Invoice.model";
 
 export const create = async (invoice: IInvoice): Promise<IInvoiceResponse> => {
+    console.log(`file: invoice.service.ts:19 > invoice:`, invoice);
     try {
         const tempItems = invoice.items.map((item) => {
             return {
@@ -25,6 +34,10 @@ export const create = async (invoice: IInvoice): Promise<IInvoiceResponse> => {
             customerPhone: invoice.customerPhone || "",
             items: tempItems,
             status: invoice.status,
+            area: {
+                areaId: new mongoose.Types.ObjectId(invoice.area.areaId),
+                tableId: new mongoose.Types.ObjectId(invoice.area.tableId),
+            },
         };
 
         const newInvoice = new _Invoice({ ...tempInvoice });
@@ -99,10 +112,61 @@ export const get = async (
             {
                 $unset: "items.price",
             },
+
+            {
+                $lookup: {
+                    from: "areas",
+                    localField: "area.areaId",
+                    foreignField: "_id",
+                    as: "tempArea",
+                },
+            },
+            {
+                $unwind: "$tempArea",
+            },
+            {
+                $set: {
+                    area: {
+                        tableName: {
+                            $let: {
+                                vars: {
+                                    tempTable: {
+                                        $first: {
+                                            $filter: {
+                                                input: "$tempArea.tables",
+                                                as: "table",
+                                                cond: {
+                                                    $eq: [
+                                                        "$$table._id",
+                                                        "$area.tableId",
+                                                    ],
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                                in: "$$tempTable.name",
+                            },
+                        },
+                    },
+                },
+            },
+            {
+                $set: {
+                    area: {
+                        areaName: "$tempArea.name",
+                    },
+                },
+            },
+            {
+                $unset: "tempArea",
+            },
             {
                 $sort: { createdAt: 1 },
             },
         ]);
+
+        console.log("services:::::::::", result);
 
         return result as unknown as IInvoiceResponse[];
     } catch (error) {
@@ -143,5 +207,82 @@ export const update = async (
     } catch (error) {
         console.log(`file: area.service.ts:136 > error:`, error);
         throw new HttpException(500, UPDATE_INVOICE_FAIL);
+    }
+};
+
+export const updateQuantityDone = async (
+    items: IUpdateQuantityDone[]
+): Promise<IInvoiceResponse[] | undefined> => {
+    return new Promise((resolve, reject) => {
+        async.mapSeries(
+            items,
+            async (item, callback) => {
+                const findInvoice = await _Invoice.findById(item.invoiceId);
+                if (!findInvoice) {
+                    throw new HttpException(500, NOT_FOUND_INVOICE);
+                }
+
+                const updateInvoice = await _Invoice.findOneAndUpdate(
+                    {
+                        _id: item.invoiceId,
+                        "items.productId": new Types.ObjectId(item.productId),
+                    },
+                    {
+                        $set: {
+                            "items.$.done": item.quantity,
+                            "items.$.status": item.status,
+                        },
+                    },
+                    { new: true }
+                );
+
+                const getInvoice: IInvoiceResponse[] = await get(
+                    updateInvoice._id,
+                    "invoiceId"
+                );
+
+                callback(null, getInvoice[0]);
+            },
+            (err, result: IInvoiceResponse[]) => {
+                if (err) {
+                    reject({ message: "error update", err });
+                } else {
+                    resolve(result);
+                }
+            }
+        );
+    });
+};
+export const updateQuantityDelivered = async (
+    item: IUpdateQuantityDelivered
+): Promise<IInvoiceResponse[] | undefined> => {
+    try {
+        const findInvoice = await _Invoice.findById(item.invoiceId);
+        if (!findInvoice) {
+            throw new HttpException(500, NOT_FOUND_INVOICE);
+        }
+
+        const updateInvoice = await _Invoice.findOneAndUpdate(
+            {
+                _id: item.invoiceId,
+                "items.productId": new Types.ObjectId(item.productId),
+            },
+            {
+                $set: {
+                    "items.$.delivered": item.quantity,
+                    "items.$.status": item.status,
+                },
+            },
+            { new: true }
+        );
+
+        const getInvoice: IInvoiceResponse[] = await get(
+            updateInvoice._id,
+            "invoiceId"
+        );
+
+        return getInvoice;
+    } catch (error) {
+        console.log(`file: invoice.service.ts:284 > error:`, error);
     }
 };
