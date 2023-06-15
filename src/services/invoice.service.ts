@@ -188,12 +188,7 @@ export const update = async (
         const updateInvoice = await _Invoice.findOneAndUpdate(
             { _id: invoice._id },
             {
-                $set: {
-                    customerName: invoice.customerName,
-                    customerPhone: invoice.customerPhone,
-                    status: invoice.status,
-                    items: invoice.items,
-                },
+                $set: { ...invoice },
             },
             { new: true }
         );

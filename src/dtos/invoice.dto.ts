@@ -11,6 +11,7 @@ import {
 } from "@interfaces/invoice.interface";
 import {
     IsArray,
+    IsEnum,
     IsNotEmpty,
     IsNumber,
     IsOptional,
@@ -20,36 +21,44 @@ import {
 import { CartBase } from "./cart.dto";
 import { IAreaResponse } from "@interfaces/area.interface";
 
+enum InvoiceStatus {
+    waitingConfirm = "waitingConfirm",
+    serving = "serving",
+    delivered = "delivered",
+    finish = "finish",
+    cancel = "cancel",
+}
+
 export class UpdateInvoiceDto implements IUpdateInvoiceDto {
     @IsNotEmpty()
     @IsString()
     _id: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     shopId: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     customerId?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     customerName?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     customerPhone?: string;
 
-    @IsNotEmpty()
-    @IsString()
+    @IsOptional()
+    @IsEnum(InvoiceStatus)
     status: TInvoiceStatus;
 
     @IsOptional()
     @IsArray()
     items: IInvoiceItemBase[];
 
-    @IsNotEmpty()
+    @IsOptional()
     area: IAreaResponse;
 }
 
@@ -74,4 +83,8 @@ export class UpdateQuantityDelivered implements IUpdateQuantityDeliveredDto {
     @IsNotEmpty()
     @IsString()
     status: TInvoiceItemStatus;
+}
+
+export class UpdateInvoiceStatus {
+    status: TInvoiceStatus;
 }
