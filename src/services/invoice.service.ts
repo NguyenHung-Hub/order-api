@@ -28,8 +28,8 @@ export const create = async (invoice: IInvoice): Promise<IInvoiceResponse> => {
         });
 
         const tempInvoice = {
-            shopId: new mongoose.Types.ObjectId(invoice.shopId),
-            customerId: new mongoose.Types.ObjectId(invoice.customerId),
+            shopId: new Types.ObjectId(invoice.shopId),
+            customerId: new Types.ObjectId(invoice.customerId),
             customerName: invoice.customerName || "",
             customerPhone: invoice.customerPhone || "",
             items: tempItems,
@@ -58,7 +58,7 @@ export const get = async (
     let match;
 
     if (type == "invoiceId") {
-        match = { _id: id };
+        match = { _id: new Types.ObjectId(id) };
     } else {
         match = { [type]: new Types.ObjectId(id) };
     }
@@ -166,8 +166,6 @@ export const get = async (
             },
         ]);
 
-        console.log("services:::::::::", result);
-
         return result as unknown as IInvoiceResponse[];
     } catch (error) {
         console.log(`file: invoice.service.ts:142 > error:`, error);
@@ -180,6 +178,7 @@ export const update = async (
 ): Promise<IInvoiceResponse | undefined> => {
     try {
         const findInvoice = await _Invoice.findById(invoice._id);
+        console.log(invoice.waiterId);
 
         if (!findInvoice) {
             throw new HttpException(500, NOT_FOUND_INVOICE);

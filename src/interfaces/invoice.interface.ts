@@ -28,6 +28,7 @@ interface IInvoiceBase {
     _id: string;
     shopId: string;
     customerId?: string;
+    waiterId?: string;
     customerName?: string;
     customerPhone?: string;
     status: TInvoiceStatus;

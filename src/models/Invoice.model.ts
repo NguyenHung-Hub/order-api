@@ -11,7 +11,11 @@ const InvoiceScheme = new Schema(
         },
         customerId: {
             type: Schema.Types.ObjectId,
-            default: "id",
+            ref: "User",
+        },
+        waiterId: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
         },
         customerName: {
             type: String,

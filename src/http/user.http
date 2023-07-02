@@ -1,13 +1,14 @@
 @baseUrl=http://localhost:8082/v1
 
-POST {{baseUrl}}/auth
+POST {{baseUrl}}/auth/register/shop
 Content-Type: application/json
 
 {
-    "email":"dragon@gmail.com",
+    "email":"cat@gmail.com",
     "password":"1234567",
-    "phone":"0987654123",
-    "role":"645f42f71a2d4ac3379e1646"
+    "phone":"0987654789",
+    "role":"645f42be1a2d4ac3379e1640",
+    "shopId":"64664f7a0451c8fd97b8e975"
 }
 
 ####
@@ -51,6 +52,6 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-    "email":"hung@gmail.com",
+    "email":"cat@gmail.com",
     "password":"1234567"
 }

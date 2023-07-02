@@ -22,3 +22,14 @@ export interface IInterServerEvents {
 }
 
 export interface ISocketData {}
+
+export interface IJoinRoomData {
+    shopId: string;
+    userId: string;
+}
+
+export interface INotifyPrintOrderDone {
+    invoiceId: string;
+    waiterId: string;
+    message: string;
+}

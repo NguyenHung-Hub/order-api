@@ -1,6 +1,8 @@
 import { Request } from "express";
 import IUser, { IUserResponse } from "./user.interface";
 
+export type TRoleName = "customer" | "waiter" | "chef" | "manager";
+
 export interface IDataStoredInToken {
     _id: string;
 }

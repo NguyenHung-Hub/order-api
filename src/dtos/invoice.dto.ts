@@ -44,6 +44,10 @@ export class UpdateInvoiceDto implements IUpdateInvoiceDto {
 
     @IsOptional()
     @IsString()
+    waiterId?: string;
+
+    @IsOptional()
+    @IsString()
     customerName?: string;
 
     @IsOptional()
