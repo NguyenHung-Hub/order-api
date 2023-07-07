@@ -44,23 +44,19 @@ class WaiterSocket implements ISocket {
             console.log(`file: waiter.socket.ts:31 > room:`, room);
         });
 
-        socket.on("sendPrintOrderDone", (data: INotifyPrintOrderDone) => {
-            const findClient = clientInfo.findById(data.waiterId);
-            console.log(`file: manager.socket.ts:45 > findClient:`, findClient);
+        socket.on(
+            "sendPrintOrderDone",
+            (data: INotification, callback: Function) => {
+                const findReceiver = clientInfo.findById(data.receiver);
 
-            const notification: INotification = {
-                id: "123",
-                sender: "sender",
-                receiver: "receiver",
-                content: data.message,
-                isRead: false,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-            };
-            socket
-                .to(findClient.socketId)
-                .emit("receivePrintOrderDone", notification);
-        });
+                if (findReceiver) {
+                    socket
+                        .to(findReceiver.socketId)
+                        .emit("receivePrintOrderDone", data);
+                }
+                callback("Sent notification to waiter");
+            }
+        );
     }
 
     middleware(socket: Socket, next: any) {

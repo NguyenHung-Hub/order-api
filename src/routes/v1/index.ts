@@ -10,6 +10,7 @@ import roleRoute from "./role.route";
 import invoiceRoute from "./invoice.route";
 import shopRoute from "./shop.route";
 import dashboardRoute from "./dashboard.route";
+import notificationRoute from "./notification.route";
 
 const router = express.Router();
 
@@ -49,6 +50,10 @@ const defaultRoutes = [
     {
         path: "/dashboard",
         route: dashboardRoute,
+    },
+    {
+        path: "/notification",
+        route: notificationRoute,
     },
 ];
 const devRoutes = [
