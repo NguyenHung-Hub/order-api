@@ -1,4 +1,4 @@
-import { ICreateAreaDto } from "@interfaces/area.interface";
+import { ICreateAreaDto } from "../interfaces/area.interface";
 import { IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
 
 export class CreateAreaDto implements ICreateAreaDto {

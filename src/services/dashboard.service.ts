@@ -1,6 +1,6 @@
-import _Invoice from "@models/Invoice.model";
-import { IDashboardResponse } from "@interfaces/dashboard.interface";
-import _Area from "@models/Area.model";
+import _Invoice from "../models/Invoice.model";
+import { IDashboardResponse } from "../interfaces/dashboard.interface";
+import _Area from "../models/Area.model";
 import { Types } from "mongoose";
 
 interface IStep1 {

@@ -1,7 +1,7 @@
 import catchAsync from "../utils/catchAsync";
 import { Request, Response, NextFunction } from "express";
 import * as notificationService from "../services/notification.service";
-import { INotification } from "@interfaces/notification";
+import { INotification } from "../interfaces/notification";
 
 export const create = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {

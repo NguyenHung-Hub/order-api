@@ -1,4 +1,4 @@
-import { IUserResponse } from "@interfaces/user.interface";
+import { IUserResponse } from "../interfaces/user.interface";
 import { ILoginResponse } from "../interfaces/auth.interface";
 
 export class LoginResponseDto implements ILoginResponse {

@@ -4,7 +4,7 @@ import {
     IServerToClientEvents,
     ISocketData,
     ISocketHandler,
-} from "@interfaces/socket.interface";
+} from "../interfaces/socket.interface";
 import { Server, Socket } from "socket.io";
 const WEBSOCKET_CORS = {
     origin: "*",

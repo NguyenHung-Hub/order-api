@@ -12,21 +12,3 @@ export class CreateCategoryDto {
     @IsNotEmpty()
     shopId: string;
 }
-
-export class CategoryResponseDto implements ICategoryResponse {
-    _id?: string;
-    shopId: string;
-    name: string;
-    slug: string;
-    createdAt: string | object;
-    updatedAt: string | object;
-
-    constructor(data: ICategoryResponse) {
-        this._id = data._id;
-        this.shopId = data.shopId;
-        this.name = data.name;
-        this.slug = data.slug;
-        this.createdAt = data.createdAt;
-        this.updatedAt = data.updatedAt;
-    }
-}

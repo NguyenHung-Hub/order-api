@@ -4,11 +4,11 @@ import {
     IUpdateQuantityDone,
     IUpdateQuantityDoneDto,
     TInvoiceItemStatus,
-} from "@interfaces/invoice.interface";
+} from "../interfaces/invoice.interface";
 import {
     IUpdateInvoiceDto,
     TInvoiceStatus,
-} from "@interfaces/invoice.interface";
+} from "../interfaces/invoice.interface";
 import {
     IsArray,
     IsEnum,
@@ -18,8 +18,7 @@ import {
     IsString,
     ValidateNested,
 } from "class-validator";
-import { CartBase } from "./cart.dto";
-import { IAreaResponse } from "@interfaces/area.interface";
+import { IAreaResponse } from "../interfaces/area.interface";
 
 enum InvoiceStatus {
     waitingConfirm = "waitingConfirm",

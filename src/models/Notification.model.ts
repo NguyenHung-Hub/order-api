@@ -1,5 +1,5 @@
-import config from "@config/index";
-import { INotification } from "@interfaces/notification";
+import config from "../config/index";
+import { INotification } from "../interfaces/notification";
 import { Document, Schema, model } from "mongoose";
 
 const NotificationSchema = new Schema(

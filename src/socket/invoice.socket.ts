@@ -1,5 +1,5 @@
-import { IInvoice } from "@interfaces/invoice.interface";
-import ISocket from "@interfaces/socket.interface";
+import { IInvoice } from "../interfaces/invoice.interface";
+import ISocket from "../interfaces/socket.interface";
 import { Socket } from "socket.io";
 
 class InvoiceSocket implements ISocket {

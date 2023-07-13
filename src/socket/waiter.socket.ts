@@ -1,12 +1,12 @@
-import { IInvoice } from "@interfaces/invoice.interface";
+import { IInvoice } from "../interfaces/invoice.interface";
 import ISocket, {
     IJoinRoomData,
     INotifyPrintOrderDone,
-} from "@interfaces/socket.interface";
+} from "../interfaces/socket.interface";
 import { Socket } from "socket.io";
 import Websocket from "./websocket";
 import ClientInfo from "./clientInfo";
-import { INotification } from "@interfaces/notification";
+import { INotification } from "../interfaces/notification";
 
 class WaiterSocket implements ISocket {
     private static socket: Socket;

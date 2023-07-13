@@ -1,7 +1,7 @@
-import { INTERNAL_ERROR } from "@config/constances";
-import { INotification } from "@interfaces/notification";
-import _Notification from "@models/Notification.model";
-import { HttpException } from "exceptions/HttpException";
+import { INTERNAL_ERROR } from "../config/constances";
+import { INotification } from "../interfaces/notification";
+import _Notification from "../models/Notification.model";
+import { HttpException } from "../exceptions/HttpException";
 
 export const create = async (
     notification: INotification

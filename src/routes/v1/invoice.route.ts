@@ -5,13 +5,13 @@ import {
     update,
     updateQuantityDelivered,
     updateQuantityDone,
-} from "@controllers/invoice.controller";
-import { validationMiddleware } from "@middlewares/validation.middleware";
+} from "../../controllers/invoice.controller";
+import { validationMiddleware } from "../../middlewares/validation.middleware";
 import {
     UpdateInvoiceDto,
     UpdateQuantityDelivered,
     UpdateQuantityDone,
-} from "@dtos/invoice.dto";
+} from "../../dtos/invoice.dto";
 const router = express.Router();
 
 router.post("/", create);

@@ -1,4 +1,4 @@
-import { IClientInfo } from "@interfaces/clientInfo.interface";
+import { IClientInfo } from "../interfaces/clientInfo.interface";
 
 class ClientInfo {
     private static instance: ClientInfo;

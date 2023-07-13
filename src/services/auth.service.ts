@@ -12,8 +12,8 @@ import { sign } from "jsonwebtoken";
 import config from "../config";
 import { LoginResponseDto } from "../dtos/auth.dto";
 import mongoose, { Schema } from "mongoose";
-import { UserResponseDto } from "@dtos/user.dto";
-import { IUserDocument } from "@interfaces/user.interface";
+import { UserResponseDto } from "../dtos/user.dto";
+import { IUserDocument } from "../interfaces/user.interface";
 
 const createToken = (user: IUserDocument): ITokenData => {
     const dataStoredInToken: IDataStoredInToken = { _id: user._id };

@@ -2,7 +2,6 @@ import catchAsync from "../utils/catchAsync";
 import { NextFunction, Request, Response } from "express";
 import * as authService from "../services/auth.service";
 import { CREATE_USER_FAIL } from "../config/constances";
-import { UserResponseDto } from "../dtos/user.dto";
 
 export const register = catchAsync(
     async (req: Request, res: Response, next: NextFunction) => {

@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
-import { ICreateNotificationDto } from "@interfaces/notification";
+import { ICreateNotificationDto } from "../interfaces/notification";
 
 export class CreateNotificationDto implements ICreateNotificationDto {
     @IsString()

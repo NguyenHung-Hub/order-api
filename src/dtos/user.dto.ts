@@ -1,4 +1,4 @@
-import { IRole } from "@interfaces/role.interface";
+import { IRole } from "../interfaces/role.interface";
 import IUser, {
     ILoginDto,
     IUserDocument,
@@ -12,8 +12,8 @@ import {
     MaxLength,
     MinLength,
 } from "class-validator";
-import { IArea } from "@interfaces/area.interface";
-import { IShop } from "@interfaces/shop.interface";
+import { IArea } from "../interfaces/area.interface";
+import { IShop } from "../interfaces/shop.interface";
 
 export class CreateUserDto {
     @IsEmail()

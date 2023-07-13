@@ -1,4 +1,4 @@
-import { IInvoice } from "@interfaces/invoice.interface";
+import { IInvoice } from "../interfaces/invoice.interface";
 import { Document, Schema, model } from "mongoose";
 import { CartSchema } from "./Cart.model";
 

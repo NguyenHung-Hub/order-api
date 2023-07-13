@@ -1,5 +1,5 @@
 import { IInvoiceItem } from "../interfaces/invoice.interface";
-import { Schema, model } from "mongoose";
+import { Document, Schema, model } from "mongoose";
 
 export const CartSchema = new Schema(
     {

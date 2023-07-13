@@ -16,3 +16,5 @@ coverage
 temp.txt
 query.txt
 diagrams/
+
+dist/

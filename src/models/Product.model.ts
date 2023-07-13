@@ -1,4 +1,4 @@
-import { IProduct } from "@interfaces/product.interface";
+import { IProduct } from "../interfaces/product.interface";
 import { Document, Schema, model } from "mongoose";
 
 const ProductSchema = new Schema(

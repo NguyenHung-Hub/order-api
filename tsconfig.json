@@ -1,25 +1,23 @@
 {
+    "extends": "@tsconfig/node16/tsconfig.json",
     "compilerOptions": {
-        "module": "NodeNext",
-        "target": "ES6",
-        "moduleResolution": "NodeNext",
-        "baseUrl": "src",
+        "module": "Node16",
+        "target": "ES2021",
+        "moduleResolution": "Node16",
+        "esModuleInterop": true,
+        "baseUrl": ".",
         "outDir": "dist",
         "sourceMap": true,
         "noImplicitAny": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowJs": true,
+        "strict": false,
 
         "paths": {
-            "@models/*": ["models/*"],
-            "@interfaces/*": ["interfaces/*"],
-            "@services/*": ["services/*"],
-            "@utils/*": ["utils/*"],
-            "@middlewares/*": ["middlewares/*"],
-            "@dtos/*": ["dtos/*"],
-            "@controllers/*": ["controllers/*"],
-            "@config/*": ["config/*"],
-            "@socket/*": ["socket/*"]
+            "@/*": ["src/*"]
         }
     },
     "ts-node": {
