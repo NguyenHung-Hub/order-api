@@ -5,8 +5,8 @@ import nuong from "./nuong";
 
 const insert = async () => {
     try {
-        // const saved = await _Product.insertMany(lau);
-        // return saved;
+        const saved = await _Product.insertMany(nuong);
+        return saved;
     } catch (error) {
         throw new Error(`error:${error}`);
     }

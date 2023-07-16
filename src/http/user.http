@@ -7,8 +7,8 @@ Content-Type: application/json
     "email":"cat@gmail.com",
     "password":"1234567",
     "phone":"0987654789",
-    "role":"645f42be1a2d4ac3379e1640",
-    "shopId":"64664f7a0451c8fd97b8e975"
+    "role":"64b38b6fd453724bac20bc80",
+    "shopId":"64b38c56d453724bac20bc88"
 }
 
 ####

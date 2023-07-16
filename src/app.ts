@@ -26,5 +26,6 @@ app.use(errorHandlerCall);
 app.use(errorHandler);
 
 connectDB();
+insert();
 
 export default app;

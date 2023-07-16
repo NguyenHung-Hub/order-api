@@ -4,7 +4,8 @@ POST {{baseUrl}}/category
 Content-Type: application/json
 
 {
-    "name":"sdf sLẩu Sieeu"
+    "name":"Món lẩu",
+    "shopId":"64b38c56d453724bac20bc88"
 }
 
 ####

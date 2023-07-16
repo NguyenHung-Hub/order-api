@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "set NODE_ENV=development && nodemon",
     "dev-2": "set NODE_ENV=development && nodemon ./dist/index.js",
-    "seed-prod": "ts-node ./src/seeder/product/product.ts"
+    "seed-prod": "ts-node ./src/seeder/product/product.ts",
+    "test-prod": "set NODE_ENV=production && nodemon"
   },
   "keywords": [],
   "author": "",
