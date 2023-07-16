@@ -18,5 +18,6 @@ query.txt
 diagrams/
 
 dist/
-src/http/
-src/seeder/
+src/http/**
+src/seeder/**
+
