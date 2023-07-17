@@ -10,7 +10,7 @@
     "seed-prod": "ts-node ./src/seeder/product/product.ts",
     "test-prod": "set NODE_ENV=production && nodemon",
     "build": "tsc",
-    "start": "node ./dist/index.js"
+    "start": "set NODE_ENV=production && node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
