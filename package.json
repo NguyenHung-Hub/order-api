@@ -9,9 +9,16 @@
     "dev-2": "set NODE_ENV=development && nodemon ./dist/index.js",
     "seed-prod": "ts-node ./src/seeder/product/product.ts",
     "test-prod": "set NODE_ENV=production && nodemon",
-    "build": "tsc",
-    "start": "set NODE_ENV=production && node ./dist/index.js"
+    "start": "set NODE_ENV=production && nodemon",
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -27,6 +34,8 @@
     "@types/morgan": "^1.9.4",
     "@types/node": "^18.16.2",
     "nodemon": "^2.0.22",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"

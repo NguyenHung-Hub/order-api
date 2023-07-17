@@ -6,6 +6,7 @@
         "moduleResolution": "Node16",
         "esModuleInterop": true,
         "baseUrl": ".",
+        "outDir": "dist",
         "sourceMap": true,
         "noImplicitAny": true,
         "experimentalDecorators": true,

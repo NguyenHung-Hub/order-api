@@ -17,7 +17,6 @@ temp.txt
 query.txt
 diagrams/
 
-dist/
 src/http/**
 src/seeder/**
 
