@@ -7,7 +7,6 @@ import { successLogHandler, errorLogHandler } from "./config/morgan";
 import { errorHandler, errorHandlerCall } from "./middlewares/error";
 import routes from "./routes/v1";
 import connectDB from "./database";
-import insert from "./seeder/product";
 
 const app = express();
 
@@ -21,6 +20,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(compression({ level: 7 }));
 app.use(cors());
+
+app.get("/", (req, res, next) => {
+    res.send("Fast Order Api");
+});
 app.use("/v1", routes);
 app.use(errorHandlerCall);
 app.use(errorHandler);

@@ -22,6 +22,9 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, compression_1.default)({ level: 7 }));
 app.use((0, cors_1.default)());
+app.get("/", (req, res, next) => {
+    res.send("Fast Order Api");
+});
 app.use("/v1", v1_1.default);
 app.use(error_1.errorHandlerCall);
 app.use(error_1.errorHandler);
