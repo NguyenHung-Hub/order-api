@@ -8,6 +8,7 @@ const WEBSOCKET_CORS = {
         ? config.SOCKET_CORS_LOCAL
         : config.SOCKET_CORS_PROD,
     methods: ["GET", "POST"],
+    credentials: true,
 };
 
 class Websocket extends Server {

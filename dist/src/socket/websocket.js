@@ -11,6 +11,7 @@ const WEBSOCKET_CORS = {
         ? config_1.default.SOCKET_CORS_LOCAL
         : config_1.default.SOCKET_CORS_PROD,
     methods: ["GET", "POST"],
+    credentials: true,
 };
 class Websocket extends socket_io_1.Server {
     static getInstance(httpServer) {
