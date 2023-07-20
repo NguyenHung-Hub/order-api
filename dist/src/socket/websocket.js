@@ -15,7 +15,10 @@ const WEBSOCKET_CORS = {
 class Websocket extends socket_io_1.Server {
     static getInstance(httpServer) {
         if (!Websocket.io) {
-            Websocket.io = new Websocket(httpServer, { cors: WEBSOCKET_CORS });
+            Websocket.io = new Websocket(httpServer, {
+                cors: WEBSOCKET_CORS,
+                transports: ["websocket"],
+            });
         }
         return Websocket.io;
     }

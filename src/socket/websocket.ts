@@ -15,7 +15,10 @@ class Websocket extends Server {
 
     public static getInstance(httpServer: any): Websocket {
         if (!Websocket.io) {
-            Websocket.io = new Websocket(httpServer, { cors: WEBSOCKET_CORS });
+            Websocket.io = new Websocket(httpServer, {
+                cors: WEBSOCKET_CORS,
+                transports: ["websocket"],
+            });
         }
         return Websocket.io;
     }
