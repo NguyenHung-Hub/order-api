@@ -19,7 +19,9 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(compression({ level: 7 }));
-app.use(cors({ origin: [config.SOCKET_CORS_PROD, "http://localhost:5173"] }));
+app.use(
+    cors({ origin: ["https://noworder.netlify.app", "http://localhost:5173"] })
+);
 
 app.get("/", (req, res, next) => {
     res.send("Fast Order Api");
@@ -29,14 +31,14 @@ app.use(errorHandlerCall);
 app.use(errorHandler);
 
 connectDB();
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    res.header(
-        "Access-Control-Allow-Methods",
-        "PUT, GET, POST, DELETE, OPTIONS"
-    );
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     res.header("Access-Control-Allow-Headers", "Content-Type");
+//     res.header(
+//         "Access-Control-Allow-Methods",
+//         "PUT, GET, POST, DELETE, OPTIONS"
+//     );
+//     next();
+// });
 export default app;
