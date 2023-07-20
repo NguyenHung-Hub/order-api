@@ -1,8 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const config_1 = __importDefault(require("../config"));
 const socket_io_1 = require("socket.io");
+const ENV = config_1.default.env;
 const WEBSOCKET_CORS = {
-    origin: "*",
+    origin: ENV.includes("development")
+        ? config_1.default.SOCKET_CORS_LOCAL
+        : config_1.default.SOCKET_CORS_PROD,
     methods: ["GET", "POST"],
 };
 class Websocket extends socket_io_1.Server {

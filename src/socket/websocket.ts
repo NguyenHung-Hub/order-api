@@ -1,13 +1,12 @@
-import {
-    IClientToServerEvents,
-    IInterServerEvents,
-    IServerToClientEvents,
-    ISocketData,
-    ISocketHandler,
-} from "../interfaces/socket.interface";
+import config from "../config";
+import { ISocketHandler } from "../interfaces/socket.interface";
 import { Server, Socket } from "socket.io";
+
+const ENV = config.env;
 const WEBSOCKET_CORS = {
-    origin: "*",
+    origin: ENV.includes("development")
+        ? config.SOCKET_CORS_LOCAL
+        : config.SOCKET_CORS_PROD,
     methods: ["GET", "POST"],
 };
 
