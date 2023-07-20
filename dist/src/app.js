@@ -21,7 +21,7 @@ app.use((0, helmet_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, compression_1.default)({ level: 7 }));
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({ origin: [config_1.default.SOCKET_CORS_PROD, "http://localhost:5173"] }));
 app.get("/", (req, res, next) => {
     res.send("Fast Order Api");
 });

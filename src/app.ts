@@ -19,7 +19,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(compression({ level: 7 }));
-app.use(cors());
+app.use(cors({ origin: [config.SOCKET_CORS_PROD, "http://localhost:5173"] }));
 
 app.get("/", (req, res, next) => {
     res.send("Fast Order Api");
