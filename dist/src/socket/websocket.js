@@ -19,7 +19,6 @@ class Websocket extends socket_io_1.Server {
         if (!Websocket.io) {
             Websocket.io = new Websocket(httpServer, {
                 cors: WEBSOCKET_CORS,
-                transports: ["websocket", "polling"],
             });
         }
         return Websocket.io;
