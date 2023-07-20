@@ -6,8 +6,9 @@ const ENV = config.env;
 const WEBSOCKET_CORS = {
     origin: ENV.includes("development")
         ? config.SOCKET_CORS_LOCAL
-        : config.SOCKET_CORS_PROD,
+        : "https://noworder.netlify.app",
     methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
     credentials: true,
 };
 
@@ -18,7 +19,7 @@ class Websocket extends Server {
         if (!Websocket.io) {
             Websocket.io = new Websocket(httpServer, {
                 cors: WEBSOCKET_CORS,
-                transports: ["websocket", "polling"],
+                transports: ["polling"],
             });
         }
         return Websocket.io;
